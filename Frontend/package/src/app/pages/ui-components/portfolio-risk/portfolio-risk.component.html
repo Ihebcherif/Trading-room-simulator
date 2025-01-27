@@ -1,0 +1,10 @@
+<h2>Portfolio Risk Management</h2>
+
+<h3>Calculate VaR</h3>
+<p>
+  Portfolio ID: <input #portfolioId type="number" />
+  Confidence Level: <input #confidence type="number" />
+  <button (click)="calculateVaRFromInput(portfolioId.value, confidence.value)">Calculate VaR</button>
+</p>
+
+<p *ngIf="portfolioVaR">Value at Risk (VaR): {{ portfolioVaR }}</p>

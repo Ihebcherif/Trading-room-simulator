@@ -1,0 +1,39 @@
+<div class="quiz-container">
+    <h1>Gestion des Quiz</h1>
+  
+    <!-- Affichage de la liste des quiz -->
+    <div class="quiz-list">
+      <h2>Liste des Quiz</h2>
+      <ul>
+        <li *ngFor="let quiz of quizzes">
+          <span>{{ quiz.question }}</span>
+          <button (click)="selectQuiz(quiz)">Modifier</button>
+          <button (click)="deleteQuiz(quiz.idQuiz)">Supprimer</button>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Bouton pour ajouter un nouveau quiz -->
+    <button class="btn-add-quiz" (click)="addNewQuiz()">Ajouter un nouveau Quiz</button>
+  
+    <!-- Formulaire pour ajouter ou modifier un quiz -->
+    <div *ngIf="selectedQuiz || isEditMode" class="quiz-form">
+      <h2>{{ isEditMode ? 'Modifier le quiz' : 'Ajouter un nouveau quiz' }}</h2>
+      <form (ngSubmit)="isEditMode ? updateQuiz(selectedQuiz!.idQuiz, selectedQuiz!) : addQuiz(selectedQuiz!)">
+        <label for="question">Question</label>
+        <input [(ngModel)]="selectedQuiz!.question" name="question" required />
+  
+        <label for="reponseCorrecte">Réponse correcte</label>
+        <input [(ngModel)]="selectedQuiz!.reponseCorrecte" name="reponseCorrecte" required />
+  
+        <label for="options">Options (séparées par des virgules)</label>
+        <input [(ngModel)]="selectedQuiz!.options" name="options" required />
+  
+        <div class="form-buttons">
+          <button type="submit">{{ isEditMode ? 'Mettre à jour' : 'Ajouter' }}</button>
+          <button type="button" (click)="resetSelection()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

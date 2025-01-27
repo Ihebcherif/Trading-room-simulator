@@ -1,0 +1,10 @@
+<h2>Prediction</h2>
+<button (click)="loadPrediction()">Get Prediction</button>
+
+<div *ngIf="predictionImagePath; else noPrediction">
+  <img [src]="predictionImagePath" alt="Prediction Image" />
+</div>
+
+<ng-template #noPrediction>
+  <p>No prediction image available.</p>
+</ng-template>

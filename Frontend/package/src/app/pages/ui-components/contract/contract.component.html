@@ -1,0 +1,38 @@
+<h2>Contract Management</h2>
+
+<h3>Select Portfolio</h3>
+<select [(ngModel)]="selectedPortfolioId">
+  <option *ngFor="let portfolio of portfolios" [value]="portfolio.idPortefeuille">
+    Portfolio ID: {{ portfolio.idPortefeuille }}, Total Value: {{ portfolio.totalValue }}
+  </option>
+</select>
+
+<h3>Add Contract</h3>
+<form (ngSubmit)="addContract()">
+  Coverage: <input [(ngModel)]="newContract.coverage" name="coverage" type="number" required /><br />
+  Prime: <input [(ngModel)]="newContract.prime" name="prime" type="number" required /><br />
+  Start Date: <input [(ngModel)]="newContract.startDate" name="startDate" type="date" required /><br />
+  End Date: <input [(ngModel)]="newContract.endDate" name="endDate" type="date" required /><br />
+  Policy: 
+  <select [(ngModel)]="newContract.policy" name="policy">
+    <option value="ACTIVE">ACTIVE</option>
+    <option value="EXPIRED">EXPIRED</option>
+    <option value="PENDING">PENDING</option>
+  </select><br />
+  <button type="submit">Add Contract</button>
+</form>
+
+<h3>All Contracts</h3>
+<ul>
+  <li *ngFor="let contract of contracts">
+    ID: {{ contract.idContract }}, Coverage: {{ contract.coverage }}, Prime: {{ contract.prime }}
+    <button (click)="deleteContract(contract.idContract!)">Delete</button>
+  </li>
+</ul>
+
+<h3>Calculate Prime</h3>
+<p>
+  Confidence Level: <input #confidence type="number" />
+  <button (click)="calculatePrimeFromInput(confidence.value)">Calculate Prime</button>
+</p>
+<p *ngIf="calculatedPrime">Calculated Prime: {{ calculatedPrime }}</p>

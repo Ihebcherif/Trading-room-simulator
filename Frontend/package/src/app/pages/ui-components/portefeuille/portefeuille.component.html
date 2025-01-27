@@ -1,0 +1,16 @@
+<h2>Portfolio Management</h2>
+
+<h3>Add Portfolio</h3>
+<form (ngSubmit)="addPortefeuille()">
+  Total Value: <input [(ngModel)]="newPortefeuille.totalValue" name="totalValue" type="number" required /><br />
+  Liquidity: <input [(ngModel)]="newPortefeuille.liquidity" name="liquidity" type="number" required /><br />
+  <button type="submit">Add Portfolio</button>
+</form>
+
+<h3>All Portfolios</h3>
+<ul>
+  <li *ngFor="let portefeuille of portefeuilles">
+    ID: {{ portefeuille.idPortefeuille }}, Total Value: {{ portefeuille.totalValue }}, Liquidity: {{ portefeuille.liquidity }}
+    <button (click)="deletePortefeuille(portefeuille.idPortefeuille!)">Delete</button>
+  </li>
+</ul>

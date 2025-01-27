@@ -1,0 +1,17 @@
+<h2>Concours Management</h2>
+
+<h3>Add Concours</h3>
+<form (ngSubmit)="addConcours()">
+  Name: <input [(ngModel)]="newConcours.name" name="name" required /><br />
+  Start Date: <input [(ngModel)]="newConcours.startDate" name="startDate" type="date" required /><br />
+  End Date: <input [(ngModel)]="newConcours.endDate" name="endDate" type="date" required /><br />
+  <button type="submit">Add Concours</button>
+</form>
+
+<h3>All Concours</h3>
+<ul>
+  <li *ngFor="let concours of concoursList">
+    Name: {{ concours.name }}, Start: {{ concours.startDate }}, End: {{ concours.endDate }}
+    <button (click)="deleteConcours(concours.idConcours!)">Delete</button>
+  </li>
+</ul>

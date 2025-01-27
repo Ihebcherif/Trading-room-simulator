@@ -1,0 +1,49 @@
+<div class="formations-container">
+    <h1>Liste des Formations</h1>
+  
+    <!-- Bouton pour ajouter une nouvelle formation -->
+    <button (click)="resetSelection()" *ngIf="!isEditMode">Ajouter une formation</button>
+  
+    <!-- Formulaire de gestion de formation -->
+    <div *ngIf="selectedFormation" class="formation-form">
+      <h2>{{ isEditMode ? 'Modifier la formation' : 'Ajouter une formation' }}</h2>
+      
+      <form (ngSubmit)="isEditMode ? updateFormation(selectedFormation!.idFormation, selectedFormation!) : addFormation(selectedFormation!)">
+        <label for="title">Titre</label>
+        <input [(ngModel)]="selectedFormation.title" name="title" required />
+  
+        <label for="content">Contenu</label>
+        <textarea [(ngModel)]="selectedFormation.content" name="content" required></textarea>
+  
+        <label for="description">Description</label>
+        <textarea [(ngModel)]="selectedFormation.description" name="description" required></textarea>
+  
+        <label for="niveauDeDifficulte">Niveau de Difficulté</label>
+        <select [(ngModel)]="selectedFormation.niveauDeDifficulte" name="niveauDeDifficulte" required>
+          <option value="Facile">Facile</option>
+          <option value="Moyenne">Moyenne</option>
+          <option value="Difficile">Difficile</option>
+        </select>
+  
+        <label for="certifiante">Certifiante</label>
+        <input type="checkbox" [(ngModel)]="selectedFormation.certifiante" name="certifiante" />
+  
+        <div class="form-buttons">
+          <button type="submit">{{ isEditMode ? 'Mettre à jour' : 'Ajouter' }}</button>
+          <button type="button" (click)="resetSelection()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  
+    <div class="formations-list">
+      <h2>Formations disponibles</h2>
+      <ul>
+        <li *ngFor="let formation of formations">
+          <span>{{ formation.title }} - {{ formation.niveauDeDifficulte }}</span>
+          <button (click)="selectFormation(formation)">Modifier</button>
+          <button (click)="deleteFormation(formation.idFormation)">Supprimer</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

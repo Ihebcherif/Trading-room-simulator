@@ -1,0 +1,27 @@
+<h2>Order Management</h2>
+
+<h3>Add Order</h3>
+<form (ngSubmit)="addOrdre()">
+  Type: 
+  <select [(ngModel)]="newOrdre.typeOrdre" name="typeOrdre">
+    <option value="BUY">BUY</option>
+    <option value="SELL">SELL</option>
+  </select><br />
+  Date: <input [(ngModel)]="newOrdre.dateOrdre" name="dateOrdre" type="date" required /><br />
+  Unit Price: <input [(ngModel)]="newOrdre.unitPrice" name="unitPrice" type="number" required /><br />
+  Quantity: <input [(ngModel)]="newOrdre.quantity" name="quantity" type="number" required /><br />
+  Asset: 
+  <select [(ngModel)]="newOrdre.actif" name="actif">
+    <option value="FOREX">FOREX</option>
+    <option value="CRYPTO">CRYPTO</option>
+  </select><br />
+  <button type="submit">Add Order</button>
+</form>
+
+<h3>All Orders</h3>
+<ul>
+  <li *ngFor="let ordre of ordres">
+    ID: {{ ordre.idOrdre }}, Type: {{ ordre.typeOrdre }}, Quantity: {{ ordre.quantity }}
+    <button (click)="deleteOrdre(ordre.idOrdre!)">Delete</button>
+  </li>
+</ul>
